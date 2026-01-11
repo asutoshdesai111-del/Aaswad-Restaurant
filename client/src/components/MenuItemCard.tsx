@@ -31,7 +31,11 @@ export function MenuItemCard({ item, index }: MenuItemCardProps) {
             {item.name}
           </h3>
           <span className="font-sans font-bold text-primary text-lg">
-            {(item.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            {(item.price / 100).toLocaleString('en-IN', { 
+              style: 'currency', 
+              currency: 'INR',
+              maximumFractionDigits: 0 
+            })}
           </span>
         </div>
         <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">

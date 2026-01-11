@@ -129,72 +129,96 @@ async function seedDatabase() {
     // Starters
     await storage.createMenuItem({
       categoryId: starters.id,
-      name: "Truffle Arancini",
-      description: "Crispy risotto balls infused with black truffle, served with garlic aioli.",
-      price: 1400,
-      imageUrl: "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&q=80&w=800",
+      name: "Paneer Tikka Angare",
+      description: "Spiced cottage cheese cubes marinated in yogurt and grilled in a tandoor.",
+      price: 35000,
+      imageUrl: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
     await storage.createMenuItem({
       categoryId: starters.id,
-      name: "Burrata Caprese",
-      description: "Fresh burrata, heirloom tomatoes, basil pesto, balsamic glaze.",
-      price: 1800,
-      imageUrl: "https://images.unsplash.com/photo-1529312266912-b33cf6227e2f?auto=format&fit=crop&q=80&w=800",
+      name: "Hara Bhara Kabab",
+      description: "Delicate spinach and green pea patties stuffed with nuts and shallow fried.",
+      price: 28000,
+      imageUrl: "https://images.unsplash.com/photo-1626777553732-48993aba2d7e?auto=format&fit=crop&q=80&w=800",
+      isAvailable: true,
+    });
+    await storage.createMenuItem({
+      categoryId: starters.id,
+      name: "Chicken Malai Tikka",
+      description: "Succulent chicken chunks marinated in cream, cheese, and mild spices.",
+      price: 45000,
+      imageUrl: "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
 
     // Mains
     await storage.createMenuItem({
       categoryId: mains.id,
-      name: "Pan-Seared Scallops",
-      description: "Jumbo scallops, cauliflower purée, crispy pancetta, sage brown butter.",
-      price: 3200,
-      imageUrl: "https://images.unsplash.com/photo-1544025162-d76690b6d029?auto=format&fit=crop&q=80&w=800",
+      name: "Dal Makhani Lumière",
+      description: "Slow-cooked black lentils with cream and butter, our signature recipe.",
+      price: 42500,
+      imageUrl: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
     await storage.createMenuItem({
       categoryId: mains.id,
-      name: "Wagyu Beef Burger",
-      description: "Wagyu patty, brioche bun, aged cheddar, caramelized onions, truffle fries.",
-      price: 2600,
-      imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800",
+      name: "Butter Chicken",
+      description: "Tender chicken cooked in a rich, creamy tomato gravy with aromatic spices.",
+      price: 55000,
+      imageUrl: "https://images.unsplash.com/photo-1603894584134-f139f4007994?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
     await storage.createMenuItem({
       categoryId: mains.id,
-      name: "Herb-Crusted Lamb Rack",
-      description: "Served with fondant potatoes, seasonal greens, and rosemary jus.",
-      price: 3800,
-      imageUrl: "https://images.unsplash.com/photo-1544025162-d76690b6d029?auto=format&fit=crop&q=80&w=800",
+      name: "Mutton Rogan Josh",
+      description: "Traditional Kashmiri slow-cooked lamb in a spicy red gravy.",
+      price: 65000,
+      imageUrl: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&q=80&w=800",
+      isAvailable: true,
+    });
+    await storage.createMenuItem({
+      categoryId: mains.id,
+      name: "Paneer Butter Masala",
+      description: "Cottage cheese cubes in a rich and creamy tomato-based sauce.",
+      price: 48000,
+      imageUrl: "https://images.unsplash.com/photo-1631452180539-96ad4d304b4d?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
 
     // Desserts
     await storage.createMenuItem({
       categoryId: desserts.id,
-      name: "Dark Chocolate Fondant",
-      description: "Molten center, served with vanilla bean ice cream.",
-      price: 1400,
-      imageUrl: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80&w=800",
+      name: "Gulab Jamun with Rabri",
+      description: "Warm milk dumplings soaked in sugar syrup, served with creamy thickened milk.",
+      price: 25000,
+      imageUrl: "https://images.unsplash.com/photo-1589119908995-c6800ffca83c?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
     await storage.createMenuItem({
       categoryId: desserts.id,
-      name: "Lemon Basil Tart",
-      description: "Zesty lemon curd, sweet basil gel, Italian meringue.",
-      price: 1200,
-      imageUrl: "https://images.unsplash.com/photo-1519915093-6616b9aac2dd?auto=format&fit=crop&q=80&w=800",
+      name: "Kesar Pista Kulfi",
+      description: "Traditional Indian frozen dessert flavored with saffron and pistachios.",
+      price: 22000,
+      imageUrl: "https://images.unsplash.com/photo-1600353429815-46f414e21626?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
 
      // Drinks
     await storage.createMenuItem({
       categoryId: drinks.id,
-      name: "Signature Old Fashioned",
-      description: "Bourbon, smoked maple syrup, angostura bitters, orange peel.",
-      price: 1600,
-      imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&q=80&w=800",
+      name: "Mango Lassi",
+      description: "A thick and creamy yogurt-based drink with fresh mango pulp.",
+      price: 18000,
+      imageUrl: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&q=80&w=800",
+      isAvailable: true,
+    });
+    await storage.createMenuItem({
+      categoryId: drinks.id,
+      name: "Masala Chai",
+      description: "Traditional Indian tea brewed with aromatic spices and milk.",
+      price: 12000,
+      imageUrl: "https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?auto=format&fit=crop&q=80&w=800",
       isAvailable: true,
     });
 
