@@ -50,6 +50,33 @@ export const api = {
     },
   },
   reservations: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/admin/reservations',
+      responses: {
+        200: z.array(z.custom<typeof reservations.$inferSelect>()),
+      },
+    },
+    update: {
+      method: 'PATCH' as const,
+      path: '/api/admin/reservations/:id',
+      input: z.object({
+        status: z.enum(['pending', 'confirmed', 'cancelled']),
+        partySize: z.coerce.number().optional(),
+      }).partial(),
+      responses: {
+        200: z.custom<typeof reservations.$inferSelect>(),
+        404: errorSchemas.notFound,
+      },
+    },
+    delete: {
+      method: 'DELETE' as const,
+      path: '/api/admin/reservations/:id',
+      responses: {
+        204: z.void(),
+        404: errorSchemas.notFound,
+      },
+    },
     create: {
       method: 'POST' as const,
       path: '/api/reservations',

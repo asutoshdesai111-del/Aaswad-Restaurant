@@ -18,7 +18,9 @@ export interface IStorage {
   getMenuItems(): Promise<MenuItem[]>;
   getMenuItemsByCategory(categoryId: number): Promise<MenuItem[]>;
   getMenuItem(id: number): Promise<MenuItem | undefined>;
-  createReservation(reservation: InsertReservation): Promise<Reservation>;
+  getReservations(): Promise<Reservation[]>;
+  updateReservation(id: number, updates: Partial<Reservation>): Promise<Reservation | undefined>;
+  deleteReservation(id: number): Promise<boolean>;
   
   // Seeding methods
   createCategory(category: InsertCategory): Promise<Category>;
@@ -58,6 +60,24 @@ export class DatabaseStorage implements IStorage {
       .values(reservation)
       .returning();
     return newReservation;
+  }
+
+  async getReservations(): Promise<Reservation[]> {
+    return await db.select().from(reservations).orderBy(asc(reservations.date));
+  }
+
+  async updateReservation(id: number, updates: Partial<Reservation>): Promise<Reservation | undefined> {
+    const [updated] = await db
+      .update(reservations)
+      .set(updates)
+      .where(eq(reservations.id, id))
+      .returning();
+    return updated;
+  }
+
+  async deleteReservation(id: number): Promise<boolean> {
+    const result = await db.delete(reservations).where(eq(reservations.id, id)).returning();
+    return result.length > 0;
   }
 
   async createCategory(category: InsertCategory): Promise<Category> {

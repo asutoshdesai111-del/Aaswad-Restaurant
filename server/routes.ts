@@ -38,6 +38,40 @@ export async function registerRoutes(
   });
 
   // === Reservations ===
+  app.get(api.reservations.list.path, async (req, res) => {
+    const reservations = await storage.getReservations();
+    res.json(reservations);
+  });
+
+  app.patch(api.reservations.update.path, async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const input = api.reservations.update.input.parse(req.body);
+      const updated = await storage.updateReservation(id, input);
+      if (!updated) {
+        return res.status(404).json({ message: "Reservation not found" });
+      }
+      res.json(updated);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+          field: err.errors[0].path.join('.'),
+        });
+      }
+      throw err;
+    }
+  });
+
+  app.delete(api.reservations.delete.path, async (req, res) => {
+    const id = Number(req.params.id);
+    const success = await storage.deleteReservation(id);
+    if (!success) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+    res.status(204).end();
+  });
+
   app.post(api.reservations.create.path, async (req, res) => {
     try {
       const input = api.reservations.create.input.parse(req.body);
