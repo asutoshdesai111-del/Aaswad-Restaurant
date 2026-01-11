@@ -10,6 +10,7 @@ import Reservations from "@/pages/Reservations";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import AdminReservations from "@/pages/AdminReservations";
+import MenuItemDetail from "@/pages/MenuItemDetail";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
@@ -35,6 +36,7 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/admin/reservations" component={AdminReservations} />
+          <Route path="/menu/:id" component={MenuItemDetail} />
           <Route component={NotFound} />
         </Switch>
       </main>
