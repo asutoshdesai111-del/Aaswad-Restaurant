@@ -12,9 +12,11 @@ import { CalendarIcon, Loader2, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Reservations() {
   const mutation = useCreateReservation();
+  const { toast } = useToast();
   
   const form = useForm<InsertReservation>({
     resolver: zodResolver(insertReservationSchema),
@@ -29,7 +31,18 @@ export default function Reservations() {
   function onSubmit(data: InsertReservation) {
     mutation.mutate(data, {
       onSuccess: () => {
+        toast({
+          title: "Reservation Confirmed!",
+          description: "We look forward to seeing you at Aaswad.",
+        });
         form.reset();
+      },
+      onError: (error: Error) => {
+        toast({
+          title: "Reservation Failed",
+          description: error.message,
+          variant: "destructive",
+        });
       }
     });
   }
@@ -109,7 +122,7 @@ export default function Reservations() {
                       <FormItem>
                         <FormLabel>Phone Number</FormLabel>
                         <FormControl>
-                          <Input placeholder="+1 (555) 000-0000" {...field} className="bg-background/50 h-12" />
+                          <Input placeholder="9876543210" {...field} className="bg-background/50 h-12" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

@@ -118,7 +118,7 @@ export default function Home() {
                 Crafting Memories <br />Through Food
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Founded in 2010, Lumière has become a beacon of culinary excellence. 
+                Founded in 2010, Aaswad has become a beacon of culinary excellence. 
                 Our philosophy is simple: source the finest ingredients and let them shine through masterful technique.
               </p>
               <div className="grid grid-cols-2 gap-8">

@@ -3,8 +3,10 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
+  const { toast } = useToast();
   return (
     <div className="min-h-screen pt-32 pb-20 bg-background">
       <div className="container mx-auto px-4 md:px-6">
@@ -35,9 +37,9 @@ export default function Contact() {
                 </div>
                 <h3 className="font-serif text-2xl font-bold">Location</h3>
                 <p className="text-muted-foreground">
-                  123 Culinary Avenue,<br />
-                  SoHo District,<br />
-                  New York, NY 10012
+                  Manvel Pada,<br />
+                  Virar East,<br />
+                  Maharashtra, India
                 </p>
               </div>
 
@@ -58,7 +60,7 @@ export default function Contact() {
                   <Phone size={24} />
                 </div>
                 <h3 className="font-serif text-2xl font-bold">Phone</h3>
-                <p className="text-muted-foreground">+1 (212) 555-0123</p>
+                <p className="text-muted-foreground">+91 98765 43210</p>
               </div>
 
               <div className="space-y-4">
@@ -66,7 +68,7 @@ export default function Contact() {
                   <Mail size={24} />
                 </div>
                 <h3 className="font-serif text-2xl font-bold">Email</h3>
-                <p className="text-muted-foreground">hello@lumiere.com</p>
+                <p className="text-muted-foreground">hello@aaswad.com</p>
               </div>
             </div>
 
@@ -93,26 +95,33 @@ export default function Contact() {
             className="bg-card p-8 rounded-xl border border-border/40"
           >
             <h3 className="font-serif text-2xl font-bold mb-6">Send us a Message</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6" onSubmit={(e) => {
+              e.preventDefault();
+              toast({
+                title: "Message Sent!",
+                description: "Thank you for contacting Aaswad. We will get back to you soon.",
+              });
+              e.currentTarget.reset();
+            }}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Name</label>
-                  <Input placeholder="Your Name" className="h-12 bg-background/50" />
+                  <Input required placeholder="Your Name" className="h-12 bg-background/50" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Email</label>
-                  <Input placeholder="Your Email" className="h-12 bg-background/50" />
+                  <Input required type="email" placeholder="Your Email" className="h-12 bg-background/50" />
                 </div>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Subject</label>
-                <Input placeholder="Inquiry Type" className="h-12 bg-background/50" />
+                <Input required placeholder="Inquiry Type" className="h-12 bg-background/50" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Message</label>
-                <Textarea placeholder="How can we help you?" className="min-h-[150px] bg-background/50" />
+                <Textarea required placeholder="How can we help you?" className="min-h-[150px] bg-background/50" />
               </div>
-              <Button className="w-full h-12 uppercase tracking-widest font-bold">
+              <Button type="submit" className="w-full h-12 uppercase tracking-widest font-bold">
                 Send Message
               </Button>
             </form>

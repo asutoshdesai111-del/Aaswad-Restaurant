@@ -61,7 +61,7 @@ export default function About() {
           >
             <h2 className="font-serif text-4xl font-bold">The Ambiance</h2>
             <p className="text-muted-foreground leading-relaxed text-lg">
-              Lumière is designed to be an sanctuary from the bustling city. 
+              Aaswad is designed to be an sanctuary from the bustling city. 
               The interior features warm wood tones, soft velvet seating, and intimate lighting that sets the stage for an unforgettable evening.
               Every detail, from the hand-made ceramics to the curated playlist, is chosen to enhance your sensory experience.
             </p>

@@ -36,7 +36,7 @@ export function Navigation() {
           <Link href="/" className="flex items-center gap-2 group cursor-pointer">
             <ChefHat className="h-8 w-8 text-primary transition-transform group-hover:rotate-12" />
             <span className="font-serif text-2xl font-bold tracking-tighter">
-              LUMIÈRE
+              Aaswad
             </span>
           </Link>
 

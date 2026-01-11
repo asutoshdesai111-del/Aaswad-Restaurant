@@ -126,7 +126,7 @@ export default function Checkout() {
                           <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                           <Input id="customerName" className="pl-10" placeholder="John Doe" {...form.register("customerName")} />
                         </div>
-                        {form.formState.errors.customerName && <p className="text-xs text-destructive">{form.formState.errors.customerName.message}</p>}
+                        {form.formState.errors.customerName && <p className="text-xs text-yellow-500">{form.formState.errors.customerName.message}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="customerEmail">Email Address</Label>
@@ -134,15 +134,15 @@ export default function Checkout() {
                           <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                           <Input id="customerEmail" type="email" className="pl-10" placeholder="john@example.com" {...form.register("customerEmail")} />
                         </div>
-                        {form.formState.errors.customerEmail && <p className="text-xs text-destructive">{form.formState.errors.customerEmail.message}</p>}
+                        {form.formState.errors.customerEmail && <p className="text-xs text-yellow-500">{form.formState.errors.customerEmail.message}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="customerPhone">Phone Number</Label>
                         <div className="relative">
                           <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                          <Input id="customerPhone" className="pl-10" placeholder="10-digit mobile number" {...form.register("customerPhone")} />
+                          <Input id="customerPhone" className="pl-10" placeholder="9876543210" {...form.register("customerPhone")} />
                         </div>
-                        {form.formState.errors.customerPhone && <p className="text-xs text-destructive">{form.formState.errors.customerPhone.message}</p>}
+                        {form.formState.errors.customerPhone && <p className="text-xs text-yellow-500">{form.formState.errors.customerPhone.message}</p>}
                       </div>
                       <div className="space-y-2">
                         <Label>Payment Method</Label>
@@ -159,7 +159,7 @@ export default function Checkout() {
                         <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Textarea id="deliveryAddress" className="pl-10 min-h-[100px]" placeholder="Flat No, Building, Area, Landmank..." {...form.register("deliveryAddress")} />
                       </div>
-                      {form.formState.errors.deliveryAddress && <p className="text-xs text-destructive">{form.formState.errors.deliveryAddress.message}</p>}
+                      {form.formState.errors.deliveryAddress && <p className="text-xs text-yellow-500">{form.formState.errors.deliveryAddress.message}</p>}
                     </div>
 
                     <Button type="submit" disabled={orderMutation.isPending} className="w-full h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-xl shadow-primary/20 gap-3">
