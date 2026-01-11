@@ -49,6 +49,17 @@ export const api = {
       },
     },
   },
+  orders: {
+    create: {
+      method: 'POST' as const,
+      path: '/api/orders',
+      input: z.custom<any>(), // Will be refined in usage
+      responses: {
+        201: z.custom<any>(),
+        400: errorSchemas.validation,
+      },
+    },
+  },
   reservations: {
     list: {
       method: 'GET' as const,

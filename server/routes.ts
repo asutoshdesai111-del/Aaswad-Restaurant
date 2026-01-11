@@ -89,6 +89,16 @@ export async function registerRoutes(
     }
   });
 
+  app.post(api.orders.create.path, async (req, res) => {
+    try {
+      const order = await storage.createOrder(req.body);
+      res.status(201).json(order);
+    } catch (err) {
+      console.error("Order Error:", err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
   // Seed data on startup
   await seedDatabase();
 

@@ -47,9 +47,32 @@ export const insertReservationSchema = createInsertSchema(reservations, {
   date: z.coerce.date(),
 }).omit({ id: true, status: true });
 
+export const orders = pgTable("orders", {
+  id: serial("id").primaryKey(),
+  itemId: integer("item_id").references(() => menuItems.id).notNull(),
+  customerName: text("customer_name").notNull(),
+  customerEmail: text("customer_email").notNull(),
+  customerPhone: text("customer_phone").notNull(),
+  deliveryAddress: text("delivery_address").notNull(),
+  totalAmount: integer("total_amount").notNull(),
+  status: text("status").default("pending").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const orderRelations = relations(orders, ({ one }) => ({
+  item: one(menuItems, {
+    fields: [orders.itemId],
+    references: [menuItems.id],
+  }),
+}));
+
+export const insertOrderSchema = createInsertSchema(orders).omit({ id: true, status: true, createdAt: true });
+
 export type Category = typeof categories.$inferSelect;
 export type InsertCategory = z.infer<typeof insertCategorySchema>;
 export type MenuItem = typeof menuItems.$inferSelect;
 export type InsertMenuItem = z.infer<typeof insertMenuItemSchema>;
 export type Reservation = typeof reservations.$inferSelect;
 export type InsertReservation = z.infer<typeof insertReservationSchema>;
+export type Order = typeof orders.$inferSelect;
+export type InsertOrder = z.infer<typeof insertOrderSchema>;

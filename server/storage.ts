@@ -3,12 +3,15 @@ import {
   categories,
   menuItems,
   reservations,
+  orders,
   type Category,
   type InsertCategory,
   type MenuItem,
   type InsertMenuItem,
   type Reservation,
   type InsertReservation,
+  type Order,
+  type InsertOrder,
 } from "@shared/schema";
 import { eq, asc } from "drizzle-orm";
 
@@ -21,6 +24,7 @@ export interface IStorage {
   getReservations(): Promise<Reservation[]>;
   updateReservation(id: number, updates: Partial<Reservation>): Promise<Reservation | undefined>;
   deleteReservation(id: number): Promise<boolean>;
+  createOrder(order: InsertOrder): Promise<Order>;
   
   // Seeding methods
   createCategory(category: InsertCategory): Promise<Category>;
@@ -78,6 +82,11 @@ export class DatabaseStorage implements IStorage {
   async deleteReservation(id: number): Promise<boolean> {
     const result = await db.delete(reservations).where(eq(reservations.id, id)).returning();
     return result.length > 0;
+  }
+
+  async createOrder(order: InsertOrder): Promise<Order> {
+    const [newOrder] = await db.insert(orders).values(order).returning();
+    return newOrder;
   }
 
   async createCategory(category: InsertCategory): Promise<Category> {

@@ -109,10 +109,12 @@ export default function MenuItemDetail() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="flex-1 h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-xl shadow-primary/20 gap-3 active:scale-95 transition-all">
-                <ShoppingBag className="h-5 w-5" />
-                Order Now
-              </Button>
+              <Link href={`/checkout/${item.id}`} className="flex-1">
+                <Button className="w-full h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 rounded-full shadow-xl shadow-primary/20 gap-3 active:scale-95 transition-all">
+                  <ShoppingBag className="h-5 w-5" />
+                  Order Now
+                </Button>
+              </Link>
               <Link href="/reservations" className="flex-1">
                 <Button variant="outline" className="w-full h-14 text-lg border-primary/30 text-primary hover:bg-primary/10 rounded-full active:scale-95 transition-all">
                   Book a Table
