@@ -43,7 +43,9 @@ export const menuItemRelations = relations(menuItems, ({ one }) => ({
 
 export const insertCategorySchema = createInsertSchema(categories).omit({ id: true });
 export const insertMenuItemSchema = createInsertSchema(menuItems).omit({ id: true });
-export const insertReservationSchema = createInsertSchema(reservations).omit({ id: true, status: true });
+export const insertReservationSchema = createInsertSchema(reservations, {
+  date: z.coerce.date(),
+}).omit({ id: true, status: true });
 
 export type Category = typeof categories.$inferSelect;
 export type InsertCategory = z.infer<typeof insertCategorySchema>;

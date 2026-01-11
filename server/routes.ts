@@ -50,7 +50,8 @@ export async function registerRoutes(
           field: err.errors[0].path.join('.'),
         });
       }
-      throw err;
+      console.error("Reservation Error:", err);
+      res.status(500).json({ message: "Internal Server Error" });
     }
   });
 
