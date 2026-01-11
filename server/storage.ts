@@ -25,6 +25,8 @@ export interface IStorage {
   updateReservation(id: number, updates: Partial<Reservation>): Promise<Reservation | undefined>;
   deleteReservation(id: number): Promise<boolean>;
   createOrder(order: InsertOrder): Promise<Order>;
+  getOrders(): Promise<(Order & { item?: MenuItem })[]>;
+  updateOrderStatus(id: number, status: string): Promise<Order | undefined>;
   
   // Seeding methods
   createCategory(category: InsertCategory): Promise<Category>;
@@ -87,6 +89,27 @@ export class DatabaseStorage implements IStorage {
   async createOrder(order: InsertOrder): Promise<Order> {
     const [newOrder] = await db.insert(orders).values(order).returning();
     return newOrder;
+  }
+
+  async getOrders(): Promise<(Order & { item?: MenuItem })[]> {
+    return await db
+      .select({
+        order: orders,
+        item: menuItems,
+      })
+      .from(orders)
+      .leftJoin(menuItems, eq(orders.itemId, menuItems.id))
+      .orderBy(asc(orders.createdAt))
+      .then(rows => rows.map(r => ({ ...r.order, item: r.item || undefined })));
+  }
+
+  async updateOrderStatus(id: number, status: string): Promise<Order | undefined> {
+    const [updated] = await db
+      .update(orders)
+      .set({ status })
+      .where(eq(orders.id, id))
+      .returning();
+    return updated;
   }
 
   async createCategory(category: InsertCategory): Promise<Category> {

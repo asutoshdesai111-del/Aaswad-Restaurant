@@ -49,6 +49,7 @@ export default function Checkout() {
         title: "Order Successful!",
         description: `Our delivery partner will reach to you within ${randomMinutes} minutes.`,
       });
+      form.reset();
       setLocation("/");
     },
     onError: (error: Error) => {

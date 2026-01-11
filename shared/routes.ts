@@ -59,6 +59,22 @@ export const api = {
         400: errorSchemas.validation,
       },
     },
+    list: {
+      method: 'GET' as const,
+      path: '/api/admin/orders',
+      responses: {
+        200: z.array(z.custom<any>()),
+      },
+    },
+    updateStatus: {
+      method: 'PATCH' as const,
+      path: '/api/admin/orders/:id/status',
+      input: z.object({ status: z.string() }),
+      responses: {
+        200: z.custom<any>(),
+        404: errorSchemas.notFound,
+      },
+    },
   },
   reservations: {
     list: {

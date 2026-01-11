@@ -99,6 +99,29 @@ export async function registerRoutes(
     }
   });
 
+  app.get(api.orders.list.path, async (_req, res) => {
+    try {
+      const orders = await storage.getOrders();
+      res.json(orders);
+    } catch (err) {
+      console.error("List Orders Error:", err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
+  app.patch(api.orders.updateStatus.path, async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const { status } = req.body;
+      const updated = await storage.updateOrderStatus(id, status);
+      if (!updated) return res.status(404).json({ message: "Order not found" });
+      res.json(updated);
+    } catch (err) {
+      console.error("Update Order Error:", err);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+
   // Seed data on startup
   await seedDatabase();
 

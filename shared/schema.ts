@@ -66,7 +66,12 @@ export const orderRelations = relations(orders, ({ one }) => ({
   }),
 }));
 
-export const insertOrderSchema = createInsertSchema(orders).omit({ id: true, status: true, createdAt: true });
+export const insertOrderSchema = createInsertSchema(orders, {
+  customerEmail: z.string().email("Invalid email address"),
+  customerPhone: z.string().min(10, "Phone number must be at least 10 digits").max(15, "Phone number too long"),
+  customerName: z.string().min(2, "Name must be at least 2 characters"),
+  deliveryAddress: z.string().min(10, "Please provide a complete delivery address"),
+}).omit({ id: true, status: true, createdAt: true });
 
 export type Category = typeof categories.$inferSelect;
 export type InsertCategory = z.infer<typeof insertCategorySchema>;

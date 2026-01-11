@@ -10,6 +10,7 @@ import Reservations from "@/pages/Reservations";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import AdminReservations from "@/pages/AdminReservations";
+import AdminOrders from "@/pages/AdminOrders";
 import MenuItemDetail from "@/pages/MenuItemDetail";
 import Checkout from "@/pages/Checkout";
 import NotFound from "@/pages/not-found";
@@ -37,6 +38,7 @@ function Router() {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/admin/reservations" component={AdminReservations} />
+          <Route path="/admin/orders" component={AdminOrders} />
           <Route path="/menu/:id" component={MenuItemDetail} />
           <Route path="/checkout/:id" component={Checkout} />
           <Route component={NotFound} />
