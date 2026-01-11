@@ -1,7 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { api, buildUrl } from "@shared/routes";
-import { queryClient } from "@/lib/queryClient";
-import { apiRequest } from "@/lib/queryClient";
+import { queryClient, apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import {
   Table,
@@ -20,13 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { Loader2, Trash2, CheckCircle, XCircle, Clock } from "lucide-react";
 import { Reservation } from "@shared/schema";
 
 export default function AdminReservations() {
   const { toast } = useToast();
-  const { data: reservations, isLoading } = useQuery<Reservation[]>({
+  const { data: reservations, isLoading, error } = useQuery<Reservation[]>({
     queryKey: [api.reservations.list.path],
   });
 
@@ -63,12 +62,25 @@ export default function AdminReservations() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px] text-destructive">
+        Error loading reservations: {(error as Error).message}
+      </div>
+    );
+  }
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "confirmed": return <CheckCircle className="h-4 w-4 text-green-500" />;
       case "cancelled": return <XCircle className="h-4 w-4 text-red-500" />;
       default: return <Clock className="h-4 w-4 text-yellow-500" />;
     }
+  };
+
+  const formatDate = (dateStr: string | Date) => {
+    const d = new Date(dateStr);
+    return isValid(d) ? format(d, "PPP p") : "Invalid Date";
   };
 
   return (
@@ -95,12 +107,12 @@ export default function AdminReservations() {
             {reservations?.map((reservation) => (
               <TableRow key={reservation.id}>
                 <TableCell>
-                  <div className="font-medium">{reservation.name}</div>
-                  <div className="text-sm text-muted-foreground">{reservation.email}</div>
-                  <div className="text-sm text-muted-foreground">{reservation.phone}</div>
+                  <div className="font-medium">{reservation.name || "N/A"}</div>
+                  <div className="text-sm text-muted-foreground">{reservation.email || "N/A"}</div>
+                  <div className="text-sm text-muted-foreground">{reservation.phone || "N/A"}</div>
                 </TableCell>
                 <TableCell>
-                  {format(new Date(reservation.date), "PPP p")}
+                  {formatDate(reservation.date)}
                 </TableCell>
                 <TableCell>{reservation.partySize} Guests</TableCell>
                 <TableCell>
